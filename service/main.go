@@ -27,23 +27,23 @@ func main() {
 	/// Mongo DB Connect
 	serverAPI := options.ServerAPI(options.ServerAPIVersion1)
 	opts := options.Client().ApplyURI(uri).SetServerAPIOptions(serverAPI)
-	client, err := mongo.Connect(context.TODO(), opts)
+	client, err := mongo.Connect(context.Background(), opts)
 	if err != nil {
 		panic(err)
 	}
 
 	defer func() {
-		if err = client.Disconnect(context.TODO()); err != nil {
+		if err = client.Disconnect(context.Background()); err != nil {
 			panic(err)
 		}
 	}()
 	var echo bson.M
-	if err := client.Database("admin").RunCommand(context.TODO(), bson.D{{Key: "ping", Value: 1}}).Decode(&echo); err != nil {
+	if err := client.Database("admin").RunCommand(context.Background(), bson.D{{Key: "ping", Value: 1}}).Decode(&echo); err != nil {
 		panic(err)
 	}
 	// ==================MongoDb ===========================
 	mux := http.NewServeMux()
-	mux.HandleFunc("/favicon.ico", http.NotFound)
+	//mux.HandleFunc("/favicon.ico", http.NotFound)
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 
 		fmt.Fprint(w, "Hello world main")
@@ -94,9 +94,9 @@ func main() {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-		defer cursor.Close(context.TODO())
+		defer cursor.Close(context.Background())
 		var movies []bson.M
-		if err = cursor.All(context.TODO(), &movies); err != nil {
+		if err = cursor.All(context.Background(), &movies); err != nil {
 
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return

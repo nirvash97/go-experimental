@@ -13,6 +13,57 @@ type person struct {
 }
 
 func main() {
+
+	var menuId int
+menuloop:
+
+	for {
+		printMenu()
+		fmt.Scanf("%d", &menuId)
+
+		switch menuId {
+		case 0:
+			break menuloop
+		case 1:
+			simpleSyntax()
+		case 2:
+			functionArray()
+		case 3:
+			functionSlice()
+		case 4:
+			usingFunc()
+		case 5:
+			functionStructure()
+		case 6:
+			fuctionPointer()
+
+		default:
+			fmt.Println("Your Select menu is not correct")
+		}
+		menuId = 0
+
+	}
+
+	//
+	//
+	//
+
+}
+func printMenu() {
+	fmt.Println("Select Menu")
+	fmt.Println("0 : exit program")
+	fmt.Println("1 : Simple Go Syntax and loop")
+	fmt.Println("2 : Using Array")
+	fmt.Println("3 : Using Slice")
+	fmt.Println("4 : Using Function")
+	fmt.Println("5 : Using Structure")
+	fmt.Println("6 : Experiment 0")
+
+	fmt.Printf(" Input Number to select menu : ")
+}
+
+func simpleSyntax() {
+	fmt.Println("========= Simple Go Syntax and loop ============")
 	fmt.Println("Hello world")
 	for i := 0; i < 10; i++ {
 		//Type Inference  ===> Define variable without type (automatic type define like var in dart)
@@ -27,12 +78,32 @@ func main() {
 			fmt.Println(message)
 		}
 	}
+	fmt.Println("==========================================================")
+}
+
+func fuctionPointer() {
+	fmt.Println("=========================== Pointer ===============================")
+	name := "Tossaporn"
+	pointer := &name
+	name2 := name
+	pointer2 := &name2
+	fmt.Println(name)
+	fmt.Println(pointer)
+	fmt.Println(name2)
+	fmt.Println(pointer2)
+
+	fmt.Println("==========================================================")
+}
+
+func functionArray() {
 	fmt.Println("========================Array============================")
 	// Array have to define size
 	box := [3]string{"orange", "apple", "grape"}
 	fmt.Println(box)
 	fmt.Println("==========================================================")
+}
 
+func functionSlice() {
 	// =========================================
 	// var box [3]string
 	// box[0] = "orange"
@@ -47,19 +118,25 @@ func main() {
 	itemBox = append(itemBox, "shield")
 	itemBox = append(itemBox, "dagger")
 	fmt.Println(itemBox)
-	fmt.Println("==========================================================")
-	//
-	//
-	//
 	printItemList(itemBox)
+
+	fmt.Println("==========================================================")
+}
+
+func usingFunc() {
+	fmt.Println("======================== Function ============================")
 	even := isNumberEven()
 	fmt.Println("isEven : ", even)
 	random, output := isRandomNumberOdd()
-	fmt.Println(fmt.Sprintf("%d"+" "+output, random))
+	fmt.Println(fmt.Sprintf("random number :: %d"+" "+output, random))
+	fmt.Println("==========================================================")
+}
+
+func functionStructure() {
 	fmt.Println("=========================== Structure ===============================")
 	person1 := person{name: "Tossaporn Meesiri", age: 26, height: 160, weight: 62.3}
 	fmt.Println("My name is "+person1.name+"age : "+fmt.Sprintf("%d", person1.age), "Height : "+fmt.Sprintf("%.2f", person1.height), "Weihgt : "+fmt.Sprintf("%.1f", person1.weight))
-
+	fmt.Println("==========================================================")
 }
 
 // function without return value
