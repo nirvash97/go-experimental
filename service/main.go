@@ -13,7 +13,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-const uri = "mongodb+srv://aegisx1:papth0391@experimental-01.8lsgx.mongodb.net/?retryWrites=true&w=majority&appName=Experimental-01"
+const uri = "MONGO_URL"
 
 func middleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
